@@ -109,8 +109,7 @@ function countNeighbors(grid, x, y) {
 }
 
 function mousePressed(event) {
-    console.log("X: ", mouseX, "Y: ", mouseX);
-    console.log(grid.length, grid[0].length);
-
+    console.log("X: ", mouseX, "Y: ", mouseY);
+    console.log("X/10: ", floor(mouseX / 10), "Y/10: ", floor(mouseY / 10));
     grid[floor(mouseY / 10)][floor(mouseX / 10)].meteor();
 }
