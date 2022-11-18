@@ -25,7 +25,8 @@ class Cell {
             for (let j = -3; j < 4; j++) {
                 let col = (this.x + i + cols) % cols;
                 let row = (this.y + j + rows) % rows;
-                grid[col][row].state = floor(random(2));
+                if (grid[col][row].state == 0)
+                    grid[col][row].state = floor(random(2));
             }
         }
     }
@@ -111,5 +112,6 @@ function countNeighbors(grid, x, y) {
 function mousePressed(event) {
     console.log("X: ", mouseX, "Y: ", mouseY);
     console.log("X/10: ", floor(mouseX / 10), "Y/10: ", floor(mouseY / 10));
+    console.log(grid);
     grid[floor(mouseY / 10)][floor(mouseX / 10)].meteor();
 }
