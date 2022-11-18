@@ -99,5 +99,5 @@ function countNeighbors(grid, x, y) {
 }
 
 function mousePressed(event) {
-    console.log(event);
+    console.log("Hola");
 }
