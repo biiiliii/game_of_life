@@ -109,5 +109,6 @@ function countNeighbors(grid, x, y) {
 }
 
 function mousePressed(event) {
-    grid[floor(mouseY / 10)][floor(mouseX / 10)].meteor()
+    console.log(mouseY, mouseX);
+    grid[floor(mouseY / 10)][floor(mouseX / 10)].meteor();
 }
