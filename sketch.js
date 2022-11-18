@@ -19,6 +19,16 @@ class Cell {
         this.state = state;
         this.gen = gen;
     }
+
+    meteor() {
+        for (let i = -1; i < 2; i++) {
+            for (let j = -1; j < 2; j++) {
+                let col = (this.x + i + cols) % cols;
+                let row = (this.y + j + rows) % rows;
+                grid[col][row].state = floor(random(2));
+            }
+        }
+    }
 }
 
 function make2DArray(cols, rows) {
@@ -99,5 +109,5 @@ function countNeighbors(grid, x, y) {
 }
 
 function mousePressed(event) {
-    console.log(mouseX, mouseY)
+    grid[floor(mouseY / 10)][floor(mouseX / 10)].meteor()
 }
