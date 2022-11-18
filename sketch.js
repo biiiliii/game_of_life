@@ -21,8 +21,8 @@ class Cell {
     }
 
     meteor() {
-        for (let i = -2; i < 3; i++) {
-            for (let j = -2; j < 3; j++) {
+        for (let i = -3; i < 4; i++) {
+            for (let j = -3; j < 4; j++) {
                 let col = (this.x + i + cols) % cols;
                 let row = (this.y + j + rows) % rows;
                 grid[col][row].state = floor(random(2));
