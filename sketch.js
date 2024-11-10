@@ -12,6 +12,10 @@ let cols;
 let rows;
 let resolution = 10;
 
+let paused = false;
+let pauseButton;
+
+
 class Cell {
     constructor(x, y, state, gen) {
         this.x = x;
@@ -53,6 +57,10 @@ function setup() {
         }
     }
     window.addEventListener('resize', windowResized);
+    pauseButton = createButton('PAUSE');
+    pauseButton.position(10, 10);
+    pauseButton.mousePressed(togglePause);
+    pauseButton.class("text")
 }
 
 function windowResized() {
@@ -69,6 +77,8 @@ function windowResized() {
 }
 
 function draw() {
+    if (paused) return;
+
     background(0);
 
     for (let i = 0; i < rows; i++) {
@@ -129,3 +139,8 @@ function mousePressed(event) {
     let row = floor(mouseY / resolution) % rows;
     grid[row][col].meteor();
 }
+
+function togglePause() {
+    paused = !paused; // Canvia l'estat de la pausa
+    pauseButton.html(paused ? 'PLAY' : 'PAUSE'); // Canvia el text del botó
+  }
