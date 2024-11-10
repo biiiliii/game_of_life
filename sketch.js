@@ -41,17 +41,17 @@ function make2DArray(cols, rows) {
 }
 
 function setup() {
-    createCanvas(1480, 720);
+    createCanvas(windowWidth, windowHeight);
     cols = width / resolution;
     rows = height / resolution;
-
+  
     grid = make2DArray(cols, rows);
     for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-            grid[i][j] = new Cell(j, i, floor(random(2)), 0);
-        }
+      for (let j = 0; j < rows; j++) {
+        grid[i][j] = new Cell(j, i, floor(random(2)), 0);
+      }
     }
-}
+  }
 
 function draw() {
     background(0);
