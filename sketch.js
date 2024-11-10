@@ -41,9 +41,9 @@ function make2DArray(cols, rows) {
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    cols = width / resolution;
-    rows = height / resolution;
+    createCanvas(window.innerWidth, window.innerHeight);
+    cols = int(window.innerWidth / resolution);
+    rows = int(window.innerHeight / resolution);
   
     grid = make2DArray(cols, rows);
     for (let i = 0; i < cols; i++) {
