@@ -25,17 +25,18 @@ class Cell {
             for (let j = -3; j < 4; j++) {
                 let col = (this.x + i + cols) % cols;
                 let row = (this.y + j + rows) % rows;
-                if (grid[col][row].state == 0)
-                    grid[col][row].state = floor(random(2));
+                if (grid[row][col].state == 0) {
+                    grid[row][col].state = floor(random(2));
+                }
             }
         }
     }
 }
 
 function make2DArray(cols, rows) {
-    let arr = new Array(cols);
+    let arr = new Array(rows);
     for (let i = 0; i < arr.length; i++) {
-        arr[i] = new Array(rows);
+        arr[i] = new Array(cols);
     }
     return arr;
 }
@@ -44,22 +45,22 @@ function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     cols = int(window.innerWidth / resolution);
     rows = int(window.innerHeight / resolution);
-  
+
     grid = make2DArray(cols, rows);
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        grid[i][j] = new Cell(j, i, floor(random(2)), 0);
-      }
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            grid[i][j] = new Cell(j, i, floor(random(2)), 0);
+        }
     }
-  }
+}
 
 function draw() {
     background(0);
 
-    for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-            let x = i * resolution;
-            let y = j * resolution;
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            let x = j * resolution;
+            let y = i * resolution;
             if (grid[i][j].state == 1) {
                 fill(grid[i][j].gen, 255 - grid[i][j].gen, 0);
                 stroke(0);
@@ -70,10 +71,10 @@ function draw() {
 
     let next = make2DArray(cols, rows);
 
-    for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
             let state = grid[i][j].state;
-            let neighbors = countNeighbors(grid, i, j);
+            let neighbors = countNeighbors(grid, j, i);
 
             if (grid[i][j].gen == 255) {
                 next[i][j] = new Cell(j, i, 0, 0);
@@ -102,16 +103,15 @@ function countNeighbors(grid, x, y) {
         for (let j = -1; j < 2; j++) {
             let col = (x + i + cols) % cols;
             let row = (y + j + rows) % rows;
-            sum += grid[col][row].state;
+            sum += grid[row][col].state;
         }
     }
-    sum -= grid[x][y].state;
+    sum -= grid[y][x].state;
     return sum;
 }
 
 function mousePressed(event) {
-    console.log("X: ", mouseX, "Y: ", mouseY);
-    console.log("X/10: ", floor(mouseX / 10), "Y/10: ", floor(mouseY / 10));
-    console.log(grid);
-    grid[floor(mouseY / 10)][floor(mouseX / 10)].meteor();
+    let col = floor(mouseX / resolution) % cols;
+    let row = floor(mouseY / resolution) % rows;
+    grid[row][col].meteor();
 }
