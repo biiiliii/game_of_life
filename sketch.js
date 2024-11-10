@@ -64,16 +64,17 @@ function setup() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  cols = int(windowWidth / resolution); 
-  rows = int(windowHeight / resolution); 
+    paused = false;
+    resizeCanvas(windowWidth, windowHeight);
+    cols = int(windowWidth / resolution); 
+    rows = int(windowHeight / resolution); 
 
-  grid = make2DArray(cols, rows); 
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      grid[i][j] = new Cell(j, i, floor(random(2)), 0);
+    grid = make2DArray(cols, rows); 
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            grid[i][j] = new Cell(j, i, floor(random(2)), 0);
+        }
     }
-  }
 }
 
 function draw() {
